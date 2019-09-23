@@ -1,0 +1,21 @@
+1.RuntimeError: Trying to backward through the graph a second time, but the buffers have already been freed
+
+在默认情况下，网络在反向传播中不允许多个backward()。需要在第一个backward设置retain_graph=True
+
+
+2. loss.backward()时间越来越长 应使用 loss += xxx.item()
+这是因为输出的loss的数据类型是Variable。
+
+而PyTorch的动态图机制就是通过Variable来构建图。主要是使用Variable计算的时候，会记录下新产生的Variable的运算符号，在反向传播求导的时候进行使用。
+
+如果这里直接将loss加起来，系统会认为这里也是计算图的一部分，也就是说网络会一直延伸变大~那么消耗的显存也就越来越大~~
+
+总之使用Variable的数据时候要非常小心。不是必要的话尽量使用Tensor来进行计算...
+
+3. model.zero_grad()  optimizer.zero_grad()  等效 这两种方式都是把模型中参数的梯度设为0
+
+4.
+os.environ['CUDA_VISIBLE_DEVICES'] = '1' ：torch.cuda.is_available() ---> False
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' ：torch.cuda.is_available() ---> True
+
+5. 先m.load_state_dict， 再m=m.cuda()/m = nn.DataParallel(m)
