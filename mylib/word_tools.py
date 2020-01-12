@@ -1,13 +1,8 @@
 import random
 import torch
+from mylib.const import LongTensor, FloatTensor
 from torch.autograd import Variable
 
-USE_CUDA = torch.cuda.is_available()
-
-FloatTensor = torch.cuda.FloatTensor if USE_CUDA else torch.FloatTensor
-LongTensor = torch.cuda.LongTensor if USE_CUDA else torch.LongTensor
-ByteTensor = torch.cuda.ByteTensor if USE_CUDA else torch.ByteTensor
-flatten = lambda l: [item for sublist in l for item in sublist]
 
 
 def getBatch(batch_size, data):
@@ -37,3 +32,9 @@ def prepare_word(word, word2index, unk="<UNK>", return_tensor=False):
         return idx
     else:
         return Variable(LongTensor(idx))
+
+
+def get_wordindex(vocab_list: list):
+    word2index = {word: index for index, word in enumerate(vocab_list)}
+    index2word = {index: word for word, index in word2index.items()}
+    return word2index, index2word
