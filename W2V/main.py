@@ -3,6 +3,7 @@ from torch.optim import Adam
 from utils import *
 import numpy as np
 from models.SG import SkipGram
+from models.CBow import CBow
 import torch.nn.functional as F
 from torch import nn
 import random
@@ -43,7 +44,7 @@ def main(sg=True):
     if sg:
         model = SkipGram(vocabs.size(0) + 1, 300)
     else:
-        model = SkipGram(vocabs.size(0) + 1, 300)
+        model = CBow(vocabs.size(0) + 1, 300)
     # train(model, data_loader, vocabs)
 
     for i in range(5):
@@ -56,3 +57,4 @@ def main(sg=True):
 
 if __name__ == '__main__':
     main()
+    main(False)
