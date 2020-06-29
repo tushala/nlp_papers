@@ -38,11 +38,10 @@ def get_index_dict(vocab):
 
 
 def prepare_word(words, word2index):
-
     return [word2index.get(word, word2index["<UNK>"]) for word in words]
 
 
-def make_train_data(sg=True):
+def make_train_data(args):
     X_p = []
     y_p = []
     train_data = []
@@ -52,16 +51,18 @@ def make_train_data(sg=True):
     windows = flatten(
         [list(nltk.ngrams(['<DUMMY>'] * WINDOW_SIZE + c + ['<DUMMY>'] * WINDOW_SIZE, WINDOW_SIZE * 2 + 1)) for c in
          corpus])
-    if sg:  # skip-gram
+    if args.model == "SG":  # skip-gram
         for window in windows:
             for i, w in enumerate(window):
                 if i != WINDOW_SIZE:
                     train_data.append(([window[WINDOW_SIZE]], [window[i]]))
-
-    else:  # CBOW
+    elif args.model == "CB":  # CBOW
         for window in windows:
             train_data.append((window, [window[WINDOW_SIZE]]))
-
+    else:
+        get_copule_words_dict(windows)
+        for window in windows:
+            ...#todo
     for tr in train_data:
         X_p.append(prepare_word(tr[0], word2index))
         y_p.append(prepare_word(tr[1], word2index))
@@ -78,3 +79,16 @@ def make_train_data(sg=True):
     )
     vocabs = prepare_word(vocab, word2index)
     return data_loader, vocabs, word2index, index2word
+
+def get_copule_words_dict(windows):
+    # todo 统计全局
+
+
+def clac_weight(w_i, w_j, d, x_max=100, alpha=0.75):
+    # glove 中计算f(Xij)
+    x_ij = d.get((w_i, w_j), 1)
+    if x_ij < x_max:
+        result = (x_ij / x_max) ** alpha
+    else:
+        result = 1
+    return result

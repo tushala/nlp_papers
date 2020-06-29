@@ -4,10 +4,11 @@ from utils import *
 import numpy as np
 from models.SG import SkipGram
 from models.CBow import CBow
+from models.Glove import GloVe
 import torch.nn.functional as F
 from torch import nn
 import random
-
+import argparse
 
 def train(model: nn.Module, train_loader, vocabs):
     optimizer = Adam(model.parameters(), lr=1e-3)
@@ -37,14 +38,19 @@ def predict(model: nn.Module, target, vocab, index2word):
     return sorted(similarities, key=lambda x: x[1], reverse=True)[:10]
 
 
-def main(sg=True):
-    data_loader, vocab, w2i, i2w = make_train_data(sg)
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", choices=["SG", "CB", "Glove"], type=str, required=True)
+    args = parser.parse_args()
+    data_loader, vocab, w2i, i2w = make_train_data(args)
     vocabs = torch.tensor(vocab, dtype=torch.long)
 
-    if sg:
-        model = SkipGram(vocabs.size(0) + 1, 300)
+    if args.model == "SG":
+        model = SkipGram(vocabs.size(0) + 1, EMBEDDING_DIM)
+    elif args.model == "CB":
+        model = CBow(vocabs.size(0) + 1, EMBEDDING_DIM)
     else:
-        model = CBow(vocabs.size(0) + 1, 300)
+        model = GloVe(vocabs.size(0) + 1, EMBEDDING_DIM)
     # train(model, data_loader, vocabs)
 
     for i in range(5):
@@ -57,4 +63,3 @@ def main(sg=True):
 
 if __name__ == '__main__':
     main()
-    main(False)

@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84b0a90d-2985-40e2-be97-ea4204be60ae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/词向量.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/词向量.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/const.py" beforeDir="false" afterPath="$PROJECT_DIR$/const.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/CBow.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/CBow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Glove.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Glove.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/SG.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/SG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,9 +16,9 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/$main.coverage" NAME="main Coverage Results" MODIFIED="1593249460065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/W2V$main.coverage" NAME="main Coverage Results" MODIFIED="1593335666706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/W2V$Glove.coverage" NAME="Glove Coverage Results" MODIFIED="1593335164695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
+    <SUITE FILE_PATH="coverage/W2V$main.coverage" NAME="main Coverage Results" MODIFIED="1593434457656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/W2V$CBow.coverage" NAME="CBow Coverage Results" MODIFIED="1593346407268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
+    <SUITE FILE_PATH="coverage/W2V$Glove.coverage" NAME="Glove Coverage Results" MODIFIED="1593431769027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
     <SUITE FILE_PATH="coverage/$SG.coverage" NAME="SG Coverage Results" MODIFIED="1593165099367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -67,23 +65,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="754" />
+          <entry key="py" value="1505" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="754" />
+          <entry key="Python" value="1505" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="3" />
+          <entry key="py" value="5" />
           <entry key="pyi" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="3" />
+          <entry key="Python" value="5" />
           <entry key="PythonStub" value="1" />
         </counts>
       </usages-collector>
@@ -94,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+            <state relative-caret-position="580">
+              <caret line="49" column="27" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="27" />
               <folding>
                 <element signature="e#24#52#0" expanded="true" />
               </folding>
@@ -104,21 +102,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/application/python/Lib/site-packages/mock/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/CBow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="336">
+              <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="62" />
               <folding>
                 <element signature="e#24#44#0" expanded="true" />
                 <marker date="1593348175514" expanded="true" signature="82:1211" ph="..." />
@@ -131,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/SG.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="21" column="76" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="76" />
+            <state relative-caret-position="355">
+              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="30" selection-end-column="18" />
               <folding>
                 <element signature="e#24#36#0" expanded="true" />
               </folding>
@@ -143,29 +130,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Glove.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="821">
-              <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="3673">
+              <caret line="255" column="21" selection-start-line="255" selection-start-column="6" selection-end-line="255" selection-end-column="21" />
               <folding>
-                <element signature="e#36#47#0" expanded="true" />
+                <element signature="e#61#73#0" expanded="true" />
+                <marker date="1593432776411" expanded="true" signature="121:643" ph="..." />
+                <marker date="1593432776411" expanded="true" signature="932:941" ph="..." />
+                <marker date="1593432776411" expanded="true" signature="932:1316" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/application/python/Lib/site-packages/nltk/corpus/util.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
+            <state relative-caret-position="286">
+              <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+              <folding>
+                <element signature="e#36#47#0" expanded="true" />
+                <marker date="1593435592713" expanded="true" signature="2640:2645" ph="..." />
+                <marker date="1593435592713" expanded="true" signature="2640:2660" ph="..." />
+                <marker date="1593435592713" expanded="true" signature="2712:2713" ph="..." />
+                <marker date="1593435592713" expanded="true" signature="2712:2717" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -189,9 +177,9 @@
       <find>embbeding_u</find>
       <find>777</find>
       <find>Epoch</find>
-      <find>888</find>
       <find>&lt;UNK&gt;</find>
       <find>print</find>
+      <find>X_ik</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,12 +189,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/SG.py" />
-        <option value="$PROJECT_DIR$/const.py" />
-        <option value="$PROJECT_DIR$/utils.py" />
-        <option value="$PROJECT_DIR$/models/Glove.py" />
         <option value="$PROJECT_DIR$/models/SG.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/models/CBow.py" />
+        <option value="$PROJECT_DIR$/models/Glove.py" />
+        <option value="$PROJECT_DIR$/const.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
@@ -217,7 +205,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="1273" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
   </component>
@@ -281,7 +269,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CBow">
+  <component name="RunManager" selected="Python.main">
     <configuration name="CBow" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="词向量" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -378,9 +366,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.CBow" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.Glove" />
+        <item itemvalue="Python.CBow" />
         <item itemvalue="Python.SG" />
       </list>
     </recent_temporary>
@@ -411,12 +399,12 @@
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25374377" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2536232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.33140495" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.33140495" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -441,6 +429,17 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models/Glove.py</url>
+          <line>159</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Anaconda3/Lib/multiprocessing/spawn.py" />
     <entry file="file://$PROJECT_DIR$/../train.py" />
@@ -457,51 +456,10 @@
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/modules/module.py" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/functional.py" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/__init__.pyi" />
-    <entry file="file://$PROJECT_DIR$/const.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding>
-            <element signature="e#36#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/application/python/Lib/site-packages/nltk/corpus/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Glove.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
-          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/application/python/Lib/site-packages/torch/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="1231" column="4" selection-start-line="1231" selection-start-column="4" selection-end-line="1231" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/SG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="21" column="76" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="76" />
-          <folding>
-            <element signature="e#24#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -514,24 +472,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/application/python/Lib/site-packages/nltk/corpus/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/application/python/Lib/site-packages/torch/nn/init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-400">
+          <caret line="221" column="4" selection-start-line="221" selection-start-column="4" selection-end-line="221" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/CBow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="62" />
+          <folding>
+            <element signature="e#24#44#0" expanded="true" />
+            <marker date="1593348175514" expanded="true" signature="82:1211" ph="..." />
+            <marker date="1593348175514" expanded="true" signature="507:1130" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/const.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Glove.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3673">
+          <caret line="255" column="21" selection-start-line="255" selection-start-column="6" selection-end-line="255" selection-end-column="21" />
+          <folding>
+            <element signature="e#61#73#0" expanded="true" />
+            <marker date="1593432776411" expanded="true" signature="121:643" ph="..." />
+            <marker date="1593432776411" expanded="true" signature="932:941" ph="..." />
+            <marker date="1593432776411" expanded="true" signature="932:1316" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/SG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="30" selection-end-column="18" />
+          <folding>
+            <element signature="e#24#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+        <state relative-caret-position="580">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="27" />
           <folding>
             <element signature="e#24#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/CBow.py">
+    <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="286">
+          <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
           <folding>
-            <element signature="e#24#44#0" expanded="true" />
-            <marker date="1593348175514" expanded="true" signature="82:1211" ph="..." />
-            <marker date="1593348175514" expanded="true" signature="507:1130" ph="..." />
+            <element signature="e#36#47#0" expanded="true" />
+            <marker date="1593435592713" expanded="true" signature="2640:2645" ph="..." />
+            <marker date="1593435592713" expanded="true" signature="2640:2660" ph="..." />
+            <marker date="1593435592713" expanded="true" signature="2712:2713" ph="..." />
+            <marker date="1593435592713" expanded="true" signature="2712:2717" ph="..." />
           </folding>
         </state>
       </provider>
