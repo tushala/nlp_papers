@@ -2,9 +2,10 @@
 # skip-gram
 import nltk
 from nltk.corpus import stopwords
-from collections import Counter
+from collections import Counter, defaultdict
 from torch.utils.data import TensorDataset, DataLoader
 import torch
+import numpy as np
 import re
 from const import *
 
@@ -51,6 +52,7 @@ def make_train_data(args):
     windows = flatten(
         [list(nltk.ngrams(['<DUMMY>'] * WINDOW_SIZE + c + ['<DUMMY>'] * WINDOW_SIZE, WINDOW_SIZE * 2 + 1)) for c in
          corpus])
+
     if args.model == "SG":  # skip-gram
         for window in windows:
             for i, w in enumerate(window):
@@ -60,16 +62,29 @@ def make_train_data(args):
         for window in windows:
             train_data.append((window, [window[WINDOW_SIZE]]))
     else:
-        get_copule_words_dict(windows)
-        for window in windows:
-            ...#todo
-    for tr in train_data:
-        X_p.append(prepare_word(tr[0], word2index))
-        y_p.append(prepare_word(tr[1], word2index))
-    x = torch.tensor([i for i in X_p], dtype=torch.long)
-    y = torch.tensor([i for i in y_p], dtype=torch.long)
+        train_data = get_copule_words_dict(windows, vocab, word2index)
 
-    torch_dataset = TensorDataset(x, y)
+    if args.model != "Glove":
+        for tr in train_data:
+            X_p.append(prepare_word(tr[0], word2index))
+            y_p.append(prepare_word(tr[1], word2index))
+        x = torch.tensor([i for i in X_p], dtype=torch.long)
+        y = torch.tensor([i for i in y_p], dtype=torch.long)
+
+        torch_dataset = TensorDataset(x, y)
+    else:
+        coocs = []
+        weights = []
+        for (xi, xj, cooc, weight) in train_data:
+            X_p.append([xi])
+            y_p.append([xj])
+            coocs.append(cooc)
+            weights.append(weight)
+        x = torch.tensor([i for i in X_p], dtype=torch.long)
+        y = torch.tensor([i for i in y_p], dtype=torch.long)
+        c = torch.tensor([i for i in coocs], dtype=torch.float)
+        w = torch.tensor([i for i in weights], dtype=torch.float)
+        torch_dataset = TensorDataset(x, y, c, w)
     data_loader = DataLoader(
         # 从数据库中每次抽出batch size个样本
         dataset=torch_dataset,
@@ -80,13 +95,36 @@ def make_train_data(args):
     vocabs = prepare_word(vocab, word2index)
     return data_loader, vocabs, word2index, index2word
 
-def get_copule_words_dict(windows):
+
+def get_copule_words_dict(windows, vocab, word2index):
     # todo 统计全局
+    from itertools import combinations_with_replacement
+    pair_sta = defaultdict(int)
+    for window in windows:
+        center_words = window[WINDOW_SIZE]
+        for i, w in enumerate(window):
+            if i == WINDOW_SIZE:
+                continue
+            else:
+                pair_sta[(center_words, w)] += 1
+                pair_sta[(w, center_words)] += 1
+    pair_wight_d = {}  # 无论是否存在都记录，未存在的weight很小
+    for bigram in combinations_with_replacement(vocab, 2):
+        weight = calc_weight(bigram[0], bigram[1], pair_sta)
+        pair_wight_d[bigram] = weight
+        pair_wight_d[(bigram[1], bigram[0])] = weight
+
+    train_data = []
+    for (xi, xj), weight_p in pair_wight_d.items():
+        train_data.append([word2index[xi], word2index[xj], np.log(pair_sta[xi, xj] + 1), weight_p])
+
+    return train_data
 
 
-def clac_weight(w_i, w_j, d, x_max=100, alpha=0.75):
+def calc_weight(w_i, w_j, d, x_max=100, alpha=0.75):
     # glove 中计算f(Xij)
-    x_ij = d.get((w_i, w_j), 1)
+    x_ij = d[(w_i, w_j)]
+    x_ij = max(x_ij, 1)
     if x_ij < x_max:
         result = (x_ij / x_max) ** alpha
     else:
