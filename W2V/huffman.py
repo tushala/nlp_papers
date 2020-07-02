@@ -22,6 +22,7 @@ class HuffmanCoding:
         self.word2code = {}
         self.code2word = {}
         self.start = 0
+
     def _insert(self, freq):
         for word, freq in freq.items():
             curnode = Node(word, freq)
@@ -29,16 +30,26 @@ class HuffmanCoding:
 
     def _merge(self):
         while len(self.heap) > 1:
-            n1 = self.heap.pop()
-            n2 = self.heap.pop()
+            n1 = heapq.heappop(self.heap)
+            n2 = heapq.heappop(self.heap)
             merge_node = Node(None, n1.freq + n2.freq)
+            merge_node.left = n1
+            merge_node.right = n2
             heapq.heappush(self.heap, merge_node)
 
     def _make_codes(self):
-        root = self.heap[0]
+        root = heapq.heappop(self.heap)
         self._bfs(root, "")
+        self.code2word = {i: w for i, w in self.word2code.items()}
 
     def _bfs(self, node, current_str):
+        if node.left is None and node.right is None:
+            self.word2code[node.word] = current_str
+        if node.left is not None:
+            self._bfs(node.left, current_str + "0")
+        if node.right is not None:
+            self._bfs(node.right, current_str + "1")
+
     def build(self, freq):
         self._insert(freq)
         self._merge()
@@ -53,10 +64,3 @@ if __name__ == '__main__':
     hc = HuffmanCoding()
     hc.build(frequency)
     print(hc.__dict__)
-
-x = [
-    {"name":"b","born":1997},
-    {"name":"c","born":1998},
-    {"name":"d","born":1999},
-    {"name":"e","born":1996},
-     ]

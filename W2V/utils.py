@@ -8,7 +8,7 @@ import torch
 import numpy as np
 import re
 from const import *
-
+from huffman import HuffmanCoding
 stoplist = stopwords.words('english')
 flatten = lambda l: [item for sublist in l for item in sublist]
 english_re = re.compile(r'[a-z]')
@@ -23,9 +23,9 @@ def get_corpus_words(n=300, k=1):
     word_count = Counter(words)
 
     word_count = Counter(words).most_common(len(word_count) * 4 // 5)
-    words = [w for (w, v) in word_count if v >= k and re.search(english_re, w)]
-    words.append("<UNK>")
-    return corpus, words
+    words = [(w, v) for (w, v) in word_count if v >= k and re.search(english_re, w)]
+
+    return corpus, words, len(corpus)
 
 
 def get_index_dict(vocab):
@@ -46,8 +46,17 @@ def make_train_data(args):
     X_p = []
     y_p = []
     train_data = []
-    corpus, vocab = get_corpus_words()
+    corpus, words, words_count = get_corpus_words()
+    vocab = [i[0] for i in words]
 
+    vocab.append("<UNK>")
+    unk_num = words_count - sum(i[1] for i in words)
+    words.append(("<UNK>", unk_num))
+    words = dict(words)
+    if args.update_system == "HS": # Hierarchical Softmax
+        hc = HuffmanCoding()
+        hc.build(words)
+        # todo
     word2index, index2word = get_index_dict(vocab)
     windows = flatten(
         [list(nltk.ngrams(['<DUMMY>'] * WINDOW_SIZE + c + ['<DUMMY>'] * WINDOW_SIZE, WINDOW_SIZE * 2 + 1)) for c in

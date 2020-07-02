@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84b0a90d-2985-40e2-be97-ea4204be60ae" name="Default Changelist" comment="" />
+    <list default="true" id="84b0a90d-2985-40e2-be97-ea4204be60ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/huffman.py" beforeDir="false" afterPath="$PROJECT_DIR$/huffman.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,12 +15,13 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/$main.coverage" NAME="main Coverage Results" MODIFIED="1593249460065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/W2V$main.coverage" NAME="main Coverage Results" MODIFIED="1593516062283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/W2V$main.coverage" NAME="main Coverage Results" MODIFIED="1593672774163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/W2V$.coverage" NAME="新建文本文档 Coverage Results" MODIFIED="1593593495609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
     <SUITE FILE_PATH="coverage/W2V$CBow.coverage" NAME="CBow Coverage Results" MODIFIED="1593346407268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
     <SUITE FILE_PATH="coverage/W2V$Glove.coverage" NAME="Glove Coverage Results" MODIFIED="1593431769027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/models" />
     <SUITE FILE_PATH="coverage/$SG.coverage" NAME="SG Coverage Results" MODIFIED="1593165099367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/W2V$model.coverage" NAME="model Coverage Results" MODIFIED="1593491195549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
+    <SUITE FILE_PATH="coverage/W2V$huffman.coverage" NAME="huffman Coverage Results" MODIFIED="1593654569587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="495104842">
@@ -61,12 +67,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4677" />
+          <entry key="py" value="5072" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4677" />
+          <entry key="Python" value="5072" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -88,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="49" column="60" lean-forward="true" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
+            <state relative-caret-position="243">
+              <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
               <folding>
                 <element signature="e#24#52#0" expanded="true" />
               </folding>
@@ -112,31 +118,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="81" column="34" lean-forward="true" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+            <state relative-caret-position="294">
+              <caret line="58" column="14" lean-forward="true" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
               <folding>
                 <element signature="e#36#47#0" expanded="true" />
-                <marker date="1593515726919" expanded="true" signature="3254:3259" ph="..." />
-                <marker date="1593515726919" expanded="true" signature="3254:3848" ph="..." />
-                <marker date="1593515726919" expanded="true" signature="4153:4157" ph="..." />
+                <marker date="1593672916949" expanded="true" signature="3593:3598" ph="..." />
+                <marker date="1593672916949" expanded="true" signature="3593:4187" ph="..." />
+                <marker date="1593672916949" expanded="true" signature="4492:4496" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/huffman.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="61" column="6" lean-forward="true" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+            <state relative-caret-position="394">
+              <caret line="64" column="23" lean-forward="true" selection-start-line="63" selection-start-column="3" selection-end-line="64" selection-end-column="23" />
               <folding>
                 <element signature="e#24#36#0" expanded="true" />
-                <marker date="1593602252403" expanded="true" signature="80:85" ph="..." />
-                <marker date="1593602252403" expanded="true" signature="393:398" ph="..." />
-                <marker date="1593602252403" expanded="true" signature="1026:1031" ph="..." />
+                <marker date="1593654569581" expanded="true" signature="80:85" ph="..." />
+                <marker date="1593654569581" expanded="true" signature="393:398" ph="..." />
+                <marker date="1593654569581" expanded="true" signature="1191:1476" ph="..." />
               </folding>
             </state>
           </provider>
@@ -185,9 +191,11 @@
       <find>123</find>
       <find>unsqueeze</find>
       <find>s[i]</find>
+      <find>char</find>
     </findStrings>
     <replaceStrings>
       <replace>v</replace>
+      <replace>word</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -202,11 +210,11 @@
         <option value="D:/application/python/Lib/site-packages/nltk/corpus/util.py" />
         <option value="$PROJECT_DIR$/../../../model.py" />
         <option value="$PROJECT_DIR$/models/CBow.py" />
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/models/Glove.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/../../../新建文本文档.py" />
         <option value="$PROJECT_DIR$/huffman.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
@@ -216,7 +224,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
@@ -281,7 +289,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.新建文本文档">
+  <component name="RunManager" selected="Python.main">
     <configuration name="新建文本文档" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="词向量" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,28 +312,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CBow" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="词向量" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/CBow.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Glove" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="词向量" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -340,6 +326,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/Glove.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="huffman" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="词向量" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/huffman.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -395,17 +403,17 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.Glove" />
-      <item itemvalue="Python.CBow" />
       <item itemvalue="Python.model" />
       <item itemvalue="Python.新建文本文档" />
+      <item itemvalue="Python.huffman" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.新建文本文档" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.huffman" />
+        <item itemvalue="Python.新建文本文档" />
         <item itemvalue="Python.model" />
         <item itemvalue="Python.Glove" />
-        <item itemvalue="Python.CBow" />
       </list>
     </recent_temporary>
   </component>
@@ -432,8 +440,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27938807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -475,8 +482,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../../新建文本文档.py</url>
-          <line>187</line>
+          <line>212</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/huffman.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -570,16 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="49" column="60" lean-forward="true" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
-          <folding>
-            <element signature="e#24#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/Glove.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="678">
@@ -598,22 +600,9 @@
         <state relative-caret-position="420">
           <caret line="163" column="28" lean-forward="true" selection-start-line="163" selection-start-column="28" selection-end-line="163" selection-end-column="28" />
           <folding>
-            <marker date="1593595882476" expanded="true" signature="3100:3111" ph="..." />
-            <marker date="1593595882476" expanded="true" signature="3158:3173" ph="..." />
-            <marker date="1593595882476" expanded="true" signature="3158:3479" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="81" column="34" lean-forward="true" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
-          <folding>
-            <element signature="e#36#47#0" expanded="true" />
-            <marker date="1593515726919" expanded="true" signature="3254:3259" ph="..." />
-            <marker date="1593515726919" expanded="true" signature="3254:3848" ph="..." />
-            <marker date="1593515726919" expanded="true" signature="4153:4157" ph="..." />
+            <marker date="1593673074995" expanded="true" signature="3100:3111" ph="..." />
+            <marker date="1593673074995" expanded="true" signature="3158:3173" ph="..." />
+            <marker date="1593673074995" expanded="true" signature="3158:3479" ph="..." />
           </folding>
         </state>
       </provider>
@@ -625,15 +614,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
+          <folding>
+            <element signature="e#24#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/huffman.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="61" column="6" lean-forward="true" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+        <state relative-caret-position="394">
+          <caret line="64" column="23" lean-forward="true" selection-start-line="63" selection-start-column="3" selection-end-line="64" selection-end-column="23" />
           <folding>
             <element signature="e#24#36#0" expanded="true" />
-            <marker date="1593602252403" expanded="true" signature="80:85" ph="..." />
-            <marker date="1593602252403" expanded="true" signature="393:398" ph="..." />
-            <marker date="1593602252403" expanded="true" signature="1026:1031" ph="..." />
+            <marker date="1593654569581" expanded="true" signature="80:85" ph="..." />
+            <marker date="1593654569581" expanded="true" signature="393:398" ph="..." />
+            <marker date="1593654569581" expanded="true" signature="1191:1476" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="58" column="14" lean-forward="true" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
+          <folding>
+            <element signature="e#36#47#0" expanded="true" />
+            <marker date="1593672916949" expanded="true" signature="3593:3598" ph="..." />
+            <marker date="1593672916949" expanded="true" signature="3593:4187" ph="..." />
+            <marker date="1593672916949" expanded="true" signature="4492:4496" ph="..." />
           </folding>
         </state>
       </provider>
