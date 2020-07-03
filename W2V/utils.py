@@ -9,23 +9,25 @@ import numpy as np
 import re
 from const import *
 from huffman import HuffmanCoding
+
 stoplist = stopwords.words('english')
 flatten = lambda l: [item for sublist in l for item in sublist]
 english_re = re.compile(r'[a-z]')
 
 
-def get_corpus_words(n=300, k=1):
+def get_corpus_words(n=800, k=2):
     corpus = list(nltk.corpus.gutenberg.sents(corpus_txt))[:n]
     corpus = [[word.lower() for word in sent if word.lower() not in stoplist and len(word) > 1] for sent in corpus if
               sent]
     corpus = [i for i in corpus if len(i) > 3]
     words = flatten(corpus)
+    words_num = len(words)
     word_count = Counter(words)
 
     word_count = Counter(words).most_common(len(word_count) * 4 // 5)
     words = [(w, v) for (w, v) in word_count if v >= k and re.search(english_re, w)]
 
-    return corpus, words, len(corpus)
+    return corpus, words, words_num
 
 
 def get_index_dict(vocab):
@@ -48,15 +50,11 @@ def make_train_data(args):
     train_data = []
     corpus, words, words_count = get_corpus_words()
     vocab = [i[0] for i in words]
-
     vocab.append("<UNK>")
-    unk_num = words_count - sum(i[1] for i in words)
+    # unk_num = words_count - sum(i[1] for i in words) # unk 太多了
+    unk_num = words[0][1]
     words.append(("<UNK>", unk_num))
     words = dict(words)
-    if args.update_system == "HS": # Hierarchical Softmax
-        hc = HuffmanCoding()
-        hc.build(words)
-        # todo
     word2index, index2word = get_index_dict(vocab)
     windows = flatten(
         [list(nltk.ngrams(['<DUMMY>'] * WINDOW_SIZE + c + ['<DUMMY>'] * WINDOW_SIZE, WINDOW_SIZE * 2 + 1)) for c in
@@ -94,6 +92,7 @@ def make_train_data(args):
         c = torch.tensor([i for i in coocs], dtype=torch.float)
         w = torch.tensor([i for i in weights], dtype=torch.float)
         torch_dataset = TensorDataset(x, y, c, w)
+
     data_loader = DataLoader(
         # 从数据库中每次抽出batch size个样本
         dataset=torch_dataset,
@@ -102,7 +101,22 @@ def make_train_data(args):
         num_workers=0,
     )
     vocabs = prepare_word(vocab, word2index)
-    return data_loader, vocabs, word2index, index2word
+    res = (data_loader, vocabs, word2index, index2word)
+
+    if args.us == "HS":  # Hierarchical Softmax
+        hc = HuffmanCoding()
+
+        hc.build(words)
+        # todo
+        tensor_2_dict = hc.get_d(word2index)
+        tensor_2_dict = sorted(tensor_2_dict.items(), key=lambda x:len(x[1]))
+
+        res = res + (tensor_2_dict,)
+
+    elif args.us == "NS":  # 负采样
+        ...
+        # todo
+    return res
 
 
 def get_copule_words_dict(windows, vocab, word2index):

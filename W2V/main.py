@@ -56,7 +56,7 @@ def predict(model: nn.Module, target, vocab, index2word):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", choices=["SG", "CB", "Glove"], type=str, required=True)
-    parser.add_argument("--update_system", choices=["NS", "HS"], type=str, required=True)
+    parser.add_argument("--us", choices=["NS", "HS"], type=str, default=None, help="update_system")
     args = parser.parse_args()
     data_loader, vocab, w2i, i2w = make_train_data(args)
     vocabs = torch.tensor(vocab, dtype=torch.long)

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import heapq
-from collections import deque
-
+import torch
 
 class Node:
     def __init__(self, word, freq):
@@ -40,7 +39,8 @@ class HuffmanCoding:
     def _make_codes(self):
         root = heapq.heappop(self.heap)
         self._bfs(root, "")
-        self.code2word = {i: w for i, w in self.word2code.items()}
+        self.code2word = {w: i for i, w in self.word2code.items()}
+
 
     def _bfs(self, node, current_str):
         if node.left is None and node.right is None:
@@ -55,6 +55,11 @@ class HuffmanCoding:
         self._merge()
         self._make_codes()
 
+    def get_d(self, w2i):
+        d = {}
+        for word, code in self.word2code.items():
+            d[torch.tensor(w2i[word])] = code
+        return d
 
 if __name__ == '__main__':
     from collections import Counter
@@ -63,4 +68,5 @@ if __name__ == '__main__':
     frequency = Counter(processed)
     hc = HuffmanCoding()
     hc.build(frequency)
+
     print(hc.__dict__)
