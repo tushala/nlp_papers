@@ -109,7 +109,7 @@ def make_train_data(args):
         hc.build(words)
         # todo
         tensor_2_dict = hc.get_d(word2index)
-        tensor_2_dict = sorted(tensor_2_dict.items(), key=lambda x:len(x[1]))
+        tensor_2_dict = sorted(tensor_2_dict.items(), key=lambda x: len(x[1]))
 
         res = res + (tensor_2_dict,)
 
@@ -153,3 +153,14 @@ def calc_weight(w_i, w_j, d, x_max=100, alpha=0.75):
     else:
         result = 1
     return result
+
+
+def calc_word_p(context_word_code, sig_vector):
+    # sig_vector 已sigmoid后
+    res = 1.
+    for n, char in enumerate(context_word_code):
+        if char == "1":
+            res *= sig_vector[n]
+        else:
+            res *= (1 - sig_vector[n])
+    return res

@@ -58,7 +58,10 @@ def main():
     parser.add_argument("--model", choices=["SG", "CB", "Glove"], type=str, required=True)
     parser.add_argument("--us", choices=["NS", "HS"], type=str, default=None, help="update_system")
     args = parser.parse_args()
-    data_loader, vocab, w2i, i2w = make_train_data(args)
+    if args.us is None:
+        data_loader, vocab, w2i, i2w = make_train_data(args)
+    else:
+        data_loader, vocab, w2i, i2w, tensor_code_d = make_train_data(args)
     vocabs = torch.tensor(vocab, dtype=torch.long)
 
     if args.model == "SG":
