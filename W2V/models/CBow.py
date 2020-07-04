@@ -23,7 +23,7 @@ class CBow(nn.Module):
         left = -target_emb.bmm(h.transpose(1, 2)).squeeze(2)  # B*1
         right = outer_emd.bmm(target_emb.transpose(1, 2)).squeeze(2)  # B*V
         right = torch.log(torch.sum(torch.exp(right), dim=1).unsqueeze(1))  # B*1
-        return right - left
+        return torch.mean(right - left)
 
     def predict(self, word):
         emb = self.embedding_v(word)

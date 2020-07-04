@@ -5,10 +5,12 @@ import numpy as np
 from models.SG import SkipGram
 from models.CBow import CBow
 from models.Glove import GloVe
+from models.HS import HS
 import torch.nn.functional as F
 from torch import nn
 import random
 import argparse
+
 
 def train(model: nn.Module, train_loader, vocabs):
     optimizer = Adam(model.parameters(), lr=1e-3)
@@ -24,9 +26,23 @@ def train(model: nn.Module, train_loader, vocabs):
         print(f"Epoch : {epoch}, mean_loss : {np.mean(losses):.2f}")
 
 
-def predict(model: nn.Module, target, vocab, index2word):
-    target_V = model.predict(target)
+def glove_train(model: nn.Module, train_loader):
+    optimizer = Adam(model.parameters(), lr=1e-3)
+    model.train()
+    for epoch in range(EPOCH):
+        losses = []
+        for batch_idx, (inputs, target, cooc, weight) in enumerate(train_loader):
+            model.zero_grad()
+            loss = model(inputs, target, cooc, weight)
+            loss.backward()
+            optimizer.step()
+            losses.append(loss.tolist())
+        print(f"Epoch : {epoch}, mean_loss : {np.mean(losses):.2f}")
 
+
+def predict(model: nn.Module, target, vocab, index2word):
+    target_V = model.predict(torch.tensor(target).unsqueeze(0))
+    target = index2word[target]
     similarities = []
     for i in range(len(vocab)):
         if index2word[i] == target:
@@ -41,23 +57,31 @@ def predict(model: nn.Module, target, vocab, index2word):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", choices=["SG", "CB", "Glove"], type=str, required=True)
+    parser.add_argument("--us", choices=["NS", "HS"], type=str, default=None, help="update_system")
     args = parser.parse_args()
-    data_loader, vocab, w2i, i2w = make_train_data(args)
+    if args.us is None:
+        data_loader, vocab, w2i, i2w = make_train_data(args)
+    else:
+        data_loader, vocab, w2i, i2w, tensor_code_d = make_train_data(args)
     vocabs = torch.tensor(vocab, dtype=torch.long)
-
-    if args.model == "SG":
+    if args.us is not None:
+        model = HS(vocabs.size(0) + 1, EMBEDDING_DIM, tensor_code_d)
+        train(model, data_loader, vocabs)
+    elif args.model == "SG":
         model = SkipGram(vocabs.size(0) + 1, EMBEDDING_DIM)
+        train(model, data_loader, vocabs)
     elif args.model == "CB":
         model = CBow(vocabs.size(0) + 1, EMBEDDING_DIM)
+        train(model, data_loader, vocabs)
     else:
         model = GloVe(vocabs.size(0) + 1, EMBEDDING_DIM)
-    # train(model, data_loader, vocabs)
+        glove_train(model, data_loader)
 
     for i in range(5):
         test = random.choice(list(vocab))
         target = i2w[test]
         print(f"{target}:")
-        sim_result = predict(model, torch.tensor(test).unsqueeze(0), vocab, i2w)
+        sim_result = predict(model, test, vocab, i2w)
         print(sim_result)
 
 

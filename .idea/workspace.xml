@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5deeb5e6-4a6a-452d-89da-538db72fded2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc2vec/code/总结.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc2vec/code/菜鸡采坑笔记.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fasttext/nagative_sampling.py" beforeDir="false" afterPath="$PROJECT_DIR$/fasttext/nagative_sampling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fasttext/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/fasttext/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mylib/const.py" beforeDir="false" afterPath="$PROJECT_DIR$/mylib/const.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mylib/txt_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mylib/txt_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mylib/word_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/mylib/word_tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W2V/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W2V/huffman.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W2V/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/W2V/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W2V/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/W2V/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W2V/models/CBow.py" beforeDir="false" afterPath="$PROJECT_DIR$/W2V/models/CBow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W2V/models/Glove.py" beforeDir="false" afterPath="$PROJECT_DIR$/W2V/models/Glove.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W2V/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/W2V/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fasttext/nagative_sampling.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fasttext/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/学习记录.md" beforeDir="false" afterPath="$PROJECT_DIR$/学习记录.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +27,7 @@
     <session id="-34738466">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.26" value="1" />
@@ -35,12 +38,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="13" />
+          <entry key="py" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="13" />
+          <entry key="Python" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -58,24 +61,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fasttext/nagative_sampling.py">
+        <entry file="file://$PROJECT_DIR$/W2V/huffman.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-              <folding>
-                <element signature="e#42#71#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-1853" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fasttext/utils.py">
+        <entry file="file://$PROJECT_DIR$/W2V/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="4" column="70" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
+            <state relative-caret-position="33">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
               <folding>
-                <marker date="1578844116482" expanded="true" signature="66:67" ph="..." />
+                <element signature="e#24#52#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,7 +148,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,15 +165,21 @@
               <item name="nlp_papers" type="462c0819:PsiDirectoryNode" />
               <item name="mylib" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="nlp_papers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nlp_papers" type="462c0819:PsiDirectoryNode" />
+              <item name="W2V" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../python_learning/高级编程" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/W2V" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -264,9 +267,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.092493296" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16487935" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -354,22 +356,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fasttext/nagative_sampling.py">
+    <entry file="file://$PROJECT_DIR$/fasttext/nagative_sampling.py" />
+    <entry file="file://$PROJECT_DIR$/fasttext/utils.py" />
+    <entry file="file://$PROJECT_DIR$/W2V/huffman.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding>
-            <element signature="e#42#71#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-1853" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fasttext/utils.py">
+    <entry file="file://$PROJECT_DIR$/W2V/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="70" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
+        <state relative-caret-position="33">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
           <folding>
-            <marker date="1578844116482" expanded="true" signature="66:67" ph="..." />
+            <element signature="e#24#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
