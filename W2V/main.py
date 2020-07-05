@@ -12,14 +12,17 @@ import random
 import argparse
 
 
-def train(model: nn.Module, train_loader, vocabs):
+def train(model: nn.Module, train_loader, vocabs_or_ns, un_table=None, w2i=None):
     optimizer = Adam(model.parameters(), lr=1e-3)
-    model.train()
     for epoch in range(EPOCH):
         losses = []
         for batch_idx, (inputs, target) in enumerate(train_loader):
             model.zero_grad()
-            loss = model(inputs, target, vocabs)
+            # print(vocabs_or_ns)
+            # print(777, target.size())
+            if not isinstance(vocabs_or_ns, torch.Tensor):
+                vocabs_or_ns = negative_sampling(target, un_table, w2i)
+            loss = model(inputs, target, torch.tensor(vocabs_or_ns, dtype=torch.long))
             loss.backward()
             optimizer.step()
             losses.append(loss.tolist())
@@ -59,20 +62,28 @@ def main():
     parser.add_argument("--model", choices=["SG", "CB", "Glove"], type=str, required=True)
     parser.add_argument("--us", choices=["NS", "HS"], type=str, default=None, help="update_system")
     args = parser.parse_args()
-    if args.us is None:
-        data_loader, vocab, w2i, i2w = make_train_data(args)
-    else:
-        data_loader, vocab, w2i, i2w, tensor_code_d = make_train_data(args)
+
+    data_loader, words, w2i, i2w, tensor_code_d_or_neg_func = make_train_data(args)
+    vocab = [i[0] for i in words]
+    vocab = prepare_word(vocab, w2i)
     vocabs = torch.tensor(vocab, dtype=torch.long)
-    if args.us is not None:
-        model = HS(vocabs.size(0) + 1, EMBEDDING_DIM, tensor_code_d)
+    if args.us == "HS":
+        model = HS(vocabs.size(0) + 1, EMBEDDING_DIM, tensor_code_d_or_neg_func)
         train(model, data_loader, vocabs)
-    elif args.model == "SG":
+    elif args.model == "SG" and args.us == "NS":
         model = SkipGram(vocabs.size(0) + 1, EMBEDDING_DIM)
-        train(model, data_loader, vocabs)
-    elif args.model == "CB":
+        if args.us == "NS":
+            un_table = get_un_table(words)
+            train(model, data_loader, tensor_code_d_or_neg_func, un_table, w2i)
+        else:
+            train(model, data_loader, vocabs, w2i)
+    elif args.model == "CB" and args.us == "NS":
         model = CBow(vocabs.size(0) + 1, EMBEDDING_DIM)
-        train(model, data_loader, vocabs)
+        if args.us == "NS":
+            un_table = get_un_table(words)
+            train(model, data_loader, tensor_code_d_or_neg_func, un_table, w2i)
+        else:
+            train(model, data_loader, vocabs)
     else:
         model = GloVe(vocabs.size(0) + 1, EMBEDDING_DIM)
         glove_train(model, data_loader)

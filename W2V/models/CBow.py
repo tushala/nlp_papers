@@ -14,7 +14,11 @@ class CBow(nn.Module):
 
     def forward(self, round_words, target_words, outer_words):
         batch_size = round_words.size(0)
-        outer_words = outer_words.expand((batch_size, len(outer_words)))
+        # print(1234, outer_words.size(), batch_size)
+        if outer_words.size(0) != batch_size:
+            # print(111, outer_words.size(0), batch_size)
+            outer_words = outer_words.expand((batch_size, len(outer_words)))
+        # print(12345, outer_words.size())
         round_emb = self.embedding_u(round_words)  # B*len*h
         target_emb = self.embedding_v(target_words)  # B*1*h
         outer_emd = self.embedding_u(outer_words)  # B x V x D
@@ -28,7 +32,6 @@ class CBow(nn.Module):
     def predict(self, word):
         emb = self.embedding_v(word)
         return emb
-
 
 # c = CBow(20, 20)
 # outer_words = torch.tensor(list(range(20)))

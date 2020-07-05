@@ -15,7 +15,8 @@ class SkipGram(nn.Module):
 
     def forward(self, center_words, target_words, outer_words):
         batch_size = center_words.size(0)
-        outer_words = outer_words.expand((batch_size, len(outer_words)))
+        if outer_words.size(0) != batch_size:
+            outer_words = outer_words.expand((batch_size, len(outer_words)))
         center_embeds = self.embedding_v(center_words)  # B x 1 x D
         target_embeds = self.embedding_u(target_words)  # B x 1 x D
         outer_embeds = self.embedding_u(outer_words)  # B x V x D

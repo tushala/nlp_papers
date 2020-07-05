@@ -9,6 +9,7 @@ import numpy as np
 import re
 from const import *
 from huffman import HuffmanCoding
+from random import sample, shuffle
 
 stoplist = stopwords.words('english')
 flatten = lambda l: [item for sublist in l for item in sublist]
@@ -100,21 +101,20 @@ def make_train_data(args):
         num_workers=0,
     )
     vocabs = prepare_word(vocab, word2index)
-    res = (data_loader, vocabs, word2index, index2word)
+    res = (data_loader, words, word2index, index2word)
 
     if args.us == "HS":  # Hierarchical Softmax
         hc = HuffmanCoding()
-
         hc.build(words)
-        # todo
         tensor_2_dict = hc.get_d(word2index)
         tensor_2_dict = sorted(tensor_2_dict.items(), key=lambda x: len(x[1]))
 
         res = res + (dict(tensor_2_dict),)
 
     elif args.us == "NS":  # 负采样
-        ...
-        # todo
+        res = res + (negative_sampling,)
+    else:
+        res = res + (None,)
     return res
 
 
@@ -164,3 +164,26 @@ def calc_word_p(context_word_code, sig_vector):
             res *= (1 - sig_vector[n])
 
     return res.item()
+
+
+def get_un_table(words: dict, p=0.75, Z=0.001):
+    un_table = []
+    total_words = sum(k for k in words.values())
+    for vo, count in words.items():
+        un_num = int(((count / total_words) ** p) / Z)
+        un_table.extend([vo] * un_num)
+    return un_table
+
+
+def negative_sampling(targets, unigram_table, w2i, k=10):
+    """
+    :param unigram_table:
+    :return: 负采样的单词id tensor
+    """
+    shuffle(unigram_table)
+    batch_size = targets.size(0)
+    neg_samples = []
+    for i in range(batch_size):
+        samples = sample(unigram_table, k)
+        neg_samples.append(prepare_word(samples, w2i))
+    return neg_samples
