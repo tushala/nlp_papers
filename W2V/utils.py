@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# skip-gram
+
 import nltk
 from nltk.corpus import stopwords
 from collections import Counter, defaultdict
@@ -178,7 +178,7 @@ def get_un_table(words: dict, p=0.75, Z=0.001):
 def negative_sampling(targets, unigram_table, w2i, k=10):
     """
     :param unigram_table:
-    :return: 负采样的单词id tensor
+    :return: 负采样的单词id
     """
     shuffle(unigram_table)
     batch_size = targets.size(0)
