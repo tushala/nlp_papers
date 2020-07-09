@@ -17,9 +17,6 @@ class HS(nn.Module):
         input_emb = self.embedding_u(input)  # B*len*h
         target_emb = self.embedding_v(target)
         target_codes = [self.tensor_d[t.item()] for t in target]  # B*1*h
-
-        # if input.size(1) > target.size(1): # CBOW
-        #     length = input.size(1)
         input_emb = torch.mean(input_emb, dim=1).unsqueeze(1)
         sig_vector = torch.sigmoid(input_emb.bmm(target_emb.transpose(1, 2))).squeeze(1)
         loss = sum([calc_word_p(target_code, sig_vector) for target_code in target_codes])

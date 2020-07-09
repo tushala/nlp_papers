@@ -54,7 +54,7 @@ def make_train_data(args):
     vocab.append("<UNK>")
     # unk_num = words_count - sum(i[1] for i in words) # unk 太多了
     unk_num = words[0][1]
-    words.append(("<UNK>", unk_num))
+    words = [("<UNK>", unk_num)] + words
     words = dict(words)
     word2index, index2word = get_index_dict(vocab)
     windows = flatten(
