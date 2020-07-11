@@ -3,3 +3,4 @@
 *.pyo
 *.iml
 __pycache__
+.csv
