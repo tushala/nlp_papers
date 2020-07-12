@@ -4,3 +4,4 @@
 *.iml
 __pycache__
 .csv
+*.bin

@@ -34,12 +34,15 @@ def create_data(path):
             f_csv.writerows(data)
 
 
-def get_tf_idf_corpus(path):
+def get_corpus(path, tf_idf=False, w2v=False):
     data = csv.reader(open(path, encoding="utf-8"))
     data_list = []
     for n, d in enumerate(data):
         if n == 0:
             continue
         _, text = d
-        data_list.append(text)
+        if tf_idf:
+            data_list.append(text)
+        if w2v:
+            data_list.append(text.split(" "))
     return data_list

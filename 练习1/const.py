@@ -15,3 +15,8 @@ load_path = "data/dict"
 stocks_path = os.path.join(load_path, "stocks.txt")
 stopwords_path = os.path.join(load_path, "stopwords.txt")
 han_compile = re.compile(r'[\u4E00-\u9FA5]+')
+
+model_path = "model/save"
+tfidf_path = os.path.join(model_path, "tf_idf.bin")
+w2v_path = os.path.join(model_path, "w2v.bin")
+fasttext_path = os.path.join(model_path, "fast.bin")
