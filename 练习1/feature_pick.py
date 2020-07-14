@@ -84,4 +84,5 @@ def load_model():
     return tfidf, w2v, fast
 
 
+# saver(train_data_path)
 # tfidf_path, w2v_path, fast = load_model()
