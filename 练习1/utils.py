@@ -17,6 +17,8 @@ def create_data(path):
         text = "".join(text)
         text = jieba.cut(text)
         text = [i for i in text if i not in stopwords]
+        if not text:
+            continue
         data_list.append((Labels2Level[label], " ".join(text)))
     random.shuffle(data_list)
     train_length = int(len(data_list) * 0.8)
