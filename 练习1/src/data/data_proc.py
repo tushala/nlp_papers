@@ -1,5 +1,5 @@
 import jieba
-from const import *
+from src.mylib.const import *
 
 stopwords = None
 
@@ -20,4 +20,4 @@ def init_start():
     load_stopwords(stopwords_path)
 
 
-init_start()
+

@@ -1,0 +1,9 @@
+2020-07-24 12:33:04,893 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:164] - INFO: 获取样本表示中...
+2020-07-24 12:33:34,133 - C:\Users\Administrator\Desktop\NLP\nlp_papers\练习1\src\mylib\feature_pick.py[line:85] - INFO: load tfidf_embedding model
+2020-07-24 12:33:34,134 - C:\Users\Administrator\Desktop\NLP\nlp_papers\练习1\src\mylib\feature_pick.py[line:87] - INFO: load w2v_embedding model
+2020-07-24 12:33:34,555 - C:\Users\Administrator\Desktop\NLP\nlp_papers\练习1\src\mylib\feature_pick.py[line:89] - INFO: load fast_embedding model
+2020-07-24 12:33:36,293 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:28] - INFO: fast_embedding输出词表的个数63420,w2v_embedding输出词表的个数27286
+2020-07-24 12:33:36,297 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:30] - INFO: 取词向量成功
+2020-07-24 12:33:36,569 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:35] - INFO: 读取数据完成
+2020-07-24 12:33:36,570 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:37] - INFO: [0 2 4 3 5 1 6]
+2020-07-24 12:33:36,570 - C:/Users/Administrator/Desktop/NLP/nlp_papers/练习1/src/ML/LightGbm.py[line:163] - INFO: 获取样本表示中...

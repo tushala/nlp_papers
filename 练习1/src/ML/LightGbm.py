@@ -3,35 +3,38 @@ import numpy as np
 import pandas as pd
 import lightgbm as lgb
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import preprocessing
 from sklearn.svm import SVC
 from sklearn.decomposition import PCA
 from sklearn import metrics
-from sklearn.externals import joblib
-from bayes_opt import BayesianOptimization
-from gensim import models
-from feature_pick import load_model
-from const import *
+from src.mylib.feature_pick import load_model
+from src.mylib.const import *
+from src.utils import logger
 
 max_length = 500  # 表示样本表示最大的长度,表示降维之后的维度
 sentence_max_length = 1500  # 表示句子/样本在降维之前的维度
-Train_features3, Test_features3, Train_label3, Test_label3 = [], [], [], []
 
-tfidf_model, w2v_embedding, fast_embedding = load_model()  # todo tf_idf 不会
+# Train_features3, Test_features3, Train_label3, Test_label3 = [], [], [], []
+tfidf_model, w2v_embedding, fast_embedding, train, test = None, None, None, None, None
 
-print("fast_embedding输出词表的个数{},w2v_embedding输出词表的个数{}".format(
-    len(fast_embedding.wv.vocab.keys()), len(w2v_embedding.wv.vocab.keys())))
 
-print("取词向量成功")
+def load():
+    global tfidf_model, w2v_embedding, fast_embedding, train, test
+    tfidf_model, w2v_embedding, fast_embedding = load_model()  # todo tf_idf 不会
 
-train = pd.read_csv(train_data_path)
-test = pd.read_csv(test_data_path)
-# print(train)
-print("读取数据完成")
-labelName = train.Label.unique()
-print(labelName)
+    logger.info("fast_embedding输出词表的个数{},w2v_embedding输出词表的个数{}".format(
+        len(fast_embedding.wv.vocab.keys()), len(w2v_embedding.wv.vocab.keys())))
+
+    logger.info("取词向量成功")
+
+    train = pd.read_csv(train_data_path)
+    test = pd.read_csv(test_data_path)
+    # logger.info(train)
+    logger.info("读取数据完成")
+    labelName = train.Label.unique()
+    logger.info(labelName)
 
 
 def Find_embedding_with_windows(embedding_matrix, mean=True, k=(2, 3, 4)):
@@ -99,28 +102,31 @@ def sentence2vec(query, usew2v=True):
         raise ValueError("输入格式错误")
     # 加载fast_embedding,w2v_embedding
     global fast_embedding, w2v_embedding
-    # fast_arr = np.array([fast_embedding.wv.get_vector(s)
-    #                      for s in query if s in fast_embedding.wv.vocab.keys()])
-    fast_arr = np.array([w2v_embedding.wv.get_vector(s)
-                         for s in query if s in w2v_embedding.wv.vocab.keys()])
+    if usew2v:
+        sentence_arr = np.array([w2v_embedding.wv.get_vector(s)
+                                 for s in query if s in w2v_embedding.wv.vocab.keys()])
+    else:
+        sentence_arr = np.array([fast_embedding.wv.get_vector(s)
+                                 for s in query if s in fast_embedding.wv.vocab.keys()])
+
     # 在fast_arr下滑动获取到的词向量
-    if len(fast_arr) > 0:
-        windows_fastarr = np.array(Find_embedding_with_windows(fast_arr))
+    if len(sentence_arr) > 0:
+        windows_fastarr = np.array(Find_embedding_with_windows(sentence_arr))
 
         result_attention_embedding = Find_Label_embedding(
-            fast_arr, fast_embedding)
+            sentence_arr, fast_embedding)
     else:  # 如果样本中的词都不在字典，则该词向量初始化为0
         # 这里300表示训练词嵌入设置的维度为300
         windows_fastarr = np.zeros(300)
         result_attention_embedding = np.zeros(300)
-    fast_arr_max = np.max(np.array(fast_arr), axis=0) if len(
-        fast_arr) > 0 else np.zeros(300)
-    fast_arr_avg = np.mean(np.array(fast_arr), axis=0) if len(
-        fast_arr) > 0 else np.zeros(300)
+    fast_arr_max = np.max(np.array(sentence_arr), axis=0) if len(
+        sentence_arr) > 0 else np.zeros(300)
+    fast_arr_avg = np.mean(np.array(sentence_arr), axis=0) if len(
+        sentence_arr) > 0 else np.zeros(300)
 
-    fast_arr = np.hstack((fast_arr_avg, fast_arr_max))
+    sentence_arr = np.hstack((fast_arr_avg, fast_arr_max))
     # 将多个embedding进行横向拼接
-    arr = np.hstack((np.hstack((fast_arr, windows_fastarr)),
+    arr = np.hstack((np.hstack((sentence_arr, windows_fastarr)),
                      result_attention_embedding))
 
     global sentence_max_length
@@ -153,20 +159,21 @@ def Find_Embedding():
     函数说明：该函数用于获取经过特征工程之后的样本表示
     Return:训练集特征数组(2D)，测试集特征数组(2D)，训练集标签数组（1D）,测试集标签数组（1D）
     '''
-    print("获取样本表示中...")
+    global train, test
+    logger.info("获取样本表示中...")
     min_max_scaler = preprocessing.MinMaxScaler()
     Train_features2 = min_max_scaler.fit_transform(
         np.vstack(train["Text"].apply(sentence2vec)))
     Test_features2 = min_max_scaler.fit_transform(
         np.vstack(test["Text"].apply(sentence2vec)))
-    print("获取样本词表示完成")
+    logger.info("获取样本词表示完成")
     # # 通过PCA对样本表示进行降维
     Train_features2, Test_features2 = Dimension_Reduction(
         Train=Train_features2, Test=Test_features2)
     Train_label2 = train["Label"]
     Test_label2 = test["Label"]
     #
-    print("加载训练好的词向量")
+    logger.info("加载训练好的词向量")
     print("Train_features.shape =", Train_features2.shape)
     print("Test_features.shape =", Test_features2.shape)
     print("Train_label.shape =", Train_label2.shape)
@@ -191,9 +198,9 @@ def Predict(Train_label, Test_label, Train_predict_label, Test_predict_label, mo
     # 通过调用metrics.accuracy_score计算训练集和测试集上的准确率
     train_acc = metrics.accuracy_score(Train_label, Train_predict_label)
     test_acc = metrics.accuracy_score(Test_label, Test_predict_label)
-    print(model_name + '_' + 'train accuracy %.3f' % train_acc)
+    logger.info(model_name + '_' + 'train accuracy %.3f' % train_acc)
     # 输出测试集的准确率
-    print(model_name + '_' + 'test accuracy %.3f' % test_acc)
+    logger.info(model_name + '_' + 'test accuracy %.3f' % test_acc)
 
 
 def Grid_Train_model(Train_features, Test_features, Train_label, Test_label):
@@ -251,7 +258,7 @@ def Grid_Train_model(Train_features, Test_features, Train_label, Test_label):
             model, parameters, scoring='accuracy', cv=3, n_jobs=-1)
         gsearch.fit(Train_features, Train_label)
         # 输出最好的参数
-        print("Best parameters set found on development set:{}".format(
+        logger.info("Best parameters set found on development set:{}".format(
             gsearch.best_params_))
         Test_predict_label = gsearch.predict(Test_features)
         Train_predict_label = gsearch.predict(Train_features)
@@ -261,7 +268,7 @@ def Grid_Train_model(Train_features, Test_features, Train_label, Test_label):
     # 保存训练好的模型
     # joblib.dump('#ToDo' + '.pkl')
 
-
+load()
 Train_features, Test_features, Train_label, Test_label = Find_Embedding()
 Grid_Train_model(Train_features=Train_features, Test_features=Test_features, Train_label=Train_label,
                  Test_label=Test_label)
