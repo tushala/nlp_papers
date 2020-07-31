@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
-word_d = {"SOS": 0, "EOS": 1, "PAD": 2}
+
 import pickle
-from torch.utils.data import DataLoader, TensorDataset,RandomSampler
+from torch.utils.data import DataLoader, TensorDataset, RandomSampler
 import os
 import torch
+
 path = ["data/chatdata_all.txt", "data/xiaohuangji_chatbot_data5.txt"]
-BATCH_SIZE = 10
+from const import *
+
+word_d = {"SOS": 0, "EOS": 1, "PAD": 2}
+
 
 def load_data(path):
     global word_d
@@ -16,6 +20,8 @@ def load_data(path):
             for line in f:
                 line = line.strip()
                 q, a = line.split("@@")
+                q = q[:40]
+                a = a[:40]
                 que, ans = [0], [0]
                 q_words = q.split(" ")
 
@@ -54,7 +60,7 @@ def padding(input_list):
     return input_list
 
 
-def make_data_set():
+def make_dataset():
     if not os.path.exists("data/data.pkl"):
         load_data(path)
     with open("data/data.pkl", "rb") as f:
@@ -66,10 +72,13 @@ def make_data_set():
     sampler = RandomSampler(dataset)
     dataloader = DataLoader(dataset, sampler=sampler, batch_size=BATCH_SIZE)
     return dataloader
+
+
 if __name__ == '__main__':
     # load_data(path)
-    dataloader =  make_data_set()
-    for a,b in dataloader:
+    dataloader = make_dataset()
+    for a, b in dataloader:
+        print(a)
         print(a.size())
         print(b.size())
         break
