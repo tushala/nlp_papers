@@ -1,3 +1,5 @@
 # -*- coding: utf-8 -*-
-MAX_LENGTH = 40
+MAX_LENGTH = 24
 BATCH_SIZE = 10
+EMB_DIM = 300
+HIDDEN_SIZE = 100
