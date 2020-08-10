@@ -3,6 +3,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from const import *
+from dataproc import word_2_idx
 
 
 # 为了省事 就不区分enc_hidden 和dec_hidden
@@ -25,40 +26,39 @@ class Encoder(nn.Module):
 
 
 class AttnDecoder(nn.Module):
-    def __init__(self, vocab_size, emb_dim, hidden_size, max_length=MAX_LENGTH):
+    def __init__(self, vocab_size, emb_dim, hidden_size, output_length):
         super(AttnDecoder, self).__init__()
-        self.max_length = max_length
+        self.output_length = output_length
         self.dec_emb = nn.Embedding(vocab_size, emb_dim)
         self.dec_gru = nn.GRU(emb_dim, hidden_size, 1, batch_first=True)
         self.dropout_p = nn.Dropout(0.1)
-        self.attn = nn.Linear(hidden_size * 2, max_length)
+        self.attn = nn.Linear(hidden_size * 2, output_length)
         self.attn_combine = nn.Linear(hidden_size * 2, hidden_size)
 
         self.out = nn.Linear(hidden_size, vocab_size)
         self.dropout = nn.Dropout(p=0.2)
         self.ce = nn.CrossEntropyLoss()
 
-    def forward(self, decoder_inputs, hidden, encoder_outputs, teacher_force=True):
+    def forward(self, decoder_inputs, hidden, encoder_outputs, teacher_force=True, train=True):
         """
-
         :param decoder_inputs: b * 1
         :param hidden:  b*L*h
         :param encoder_outputs: 1*b*h
         :return:
         """
-
         def init_hidden():
             return torch.zeros(hidden.size())
-
-        loss = torch.tensor(0.)
+        device = decoder_inputs.device
+        loss = torch.tensor(0.).to(device)
         attns = []
         embedded = self.dec_emb(decoder_inputs)
-        hidden = init_hidden()
+        hidden = init_hidden().to(device)
         decode_input = embedded[:, 0, :]  # <start>
-        for i in range(self.max_length - 1):
+        output_length = self.output_length - 1 if train else 1
+        for i in range(output_length):
             attn = self.attn(torch.cat((decode_input, hidden[0]), 1))
-            attn_weights = F.softmax(attn)
-            attns.append(attn_weights.tolist())
+            attn_weights = F.softmax(attn, dim=1)
+            attns.append(attn_weights.squeeze(0).tolist())
             attn_applied = attn_weights.unsqueeze(1).bmm(encoder_outputs)
             concated = torch.cat((embedded[:, i, :].unsqueeze(1), attn_applied), 2)
             if not teacher_force:
@@ -77,57 +77,34 @@ class AttnDecoder(nn.Module):
                 decode_input = self.dec_emb(ids)
 
             loss += self.ce(output, decoder_inputs[:, i])
-        return loss, attns
-
-
-e = Encoder(5586, EMB_DIM, HIDDEN_SIZE)
-x = torch.tensor([[0, 5133, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                  [0, 626, 5, 144, 5583, 4, 5584, 13, 4929, 5585, 4, 1,
-                   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [0, 626, 5, 144, 5583, 4, 5584, 13, 4929, 5585, 4, 1,
-                                                         2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]], dtype=torch.long)
-
-y = torch.tensor([[0, 2345, 1, 6, 111, 2, 2, 2, 2, 2, 2, 2,
-                   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                  [0, 727, 66, 1234, 602, 44, 558, 133, 929, 5585, 411, 1234,
-                   2222, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [0, 126, 511, 1244, 5283, 434, 5584, 1323, 499, 85, 455, 123,
-                                                            2213, 2612, 432, 2, 2, 2, 2, 2, 2, 2, 2, 2]],
-                 dtype=torch.long)
+        return loss, attns, hidden, output
 
 
 class Seq2Seq(nn.Module):
-    def __init__(self, vocab_size, emb_dim, hidden_size, max_length=MAX_LENGTH):
+    def __init__(self, vocab_size, emb_dim, hidden_size, output_length):
         super(Seq2Seq, self).__init__()
+        self.output_length = output_length
         self.enc = Encoder(vocab_size, emb_dim, hidden_size)
-        self.dec = AttnDecoder(vocab_size, emb_dim, hidden_size)
+        self.dec = AttnDecoder(vocab_size, emb_dim, hidden_size, output_length)
 
-    def forward(self, que, ans):
-        encoder_outputs, hidden = self.enc(x)
-        loss, attns = self.dec(ans, hidden, encoder_outputs)
+    def forward(self, que, ans, teacher_force=True):
+        encoder_outputs, hidden = self.enc(que)
+        loss, attns, _, _ = self.dec(ans, hidden, encoder_outputs, teacher_force)
+        loss /= self.output_length
         return loss, attns
 
+    def predict(self, que):
+        encoder_outputs, hidden = self.enc(que)
+        res = []
+        attns = []
+        cur_inputs = torch.tensor([word_2_idx["SOS"]]).unsqueeze(0)
+        while len(res) < MAX_LENGTH and cur_inputs.squeeze(0).tolist() != word_2_idx["EOS"]:
+            _, attn, hidden, nxt_predict = self.dec(cur_inputs, hidden, encoder_outputs, train=False)
+            nxt_predict = nxt_predict.squeeze(0)
 
-# encoder_outputs, hidden = e(x)
-# print(x.size())
-# print(encoder_outputs.size())  # [3, 24, 100]
-# print(hidden.size())  # [1, 3, 100]
-#
-# ad = AttnDecoder(5586, EMB_DIM, HIDDEN_SIZE, MAX_LENGTH)
-# loss, attns = ad(y, hidden, encoder_outputs)
-# # print(loss)
-# # print(attns)
-# # if use_teacher_forcing:
-# #         # Teacher forcing
-# #         for di in range(target_length):
-# #             decoder_output, decoder_hidden, decoder_attention = decoder(
-# #                 decoder_input, decoder_hidden, encoder_outputs)
-# #             loss += criterion(decoder_output, target_tensor[di])
-# #             decoder_input = target_tensor[di]  # 把输入换为目标语句中的单词
-# #
-# # else:
-# #         # Without teacher forcing
-# #         for di in range(target_length):
-# #             decoder_output, decoder_hidden, decoder_attention = decoder(
-# #                 decoder_input, decoder_hidden, encoder_outputs)
-# #             topv, topi = decoder_output.topk(1)
-# #             decoder_input = topi.squeeze().detach()  # 输入为预测出的单词
+            _, cur_inputs = nxt_predict.topk(1)
+            res.append(cur_inputs.tolist()[0])
+            cur_inputs = cur_inputs.unsqueeze(0)
+            attns.extend(attn)
+
+        return res, attns
