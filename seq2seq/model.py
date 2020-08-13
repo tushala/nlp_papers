@@ -108,3 +108,35 @@ class Seq2Seq(nn.Module):
             attns.extend(attn)
 
         return res, attns
+    
+    def beam_search(self, que, beam_width=3):
+        """不计attention了"""
+        encoder_outputs, hidden = self.enc(que)
+        cur_inputs = torch.tensor([word_2_idx["SOS"]] * beam_width).unsqueeze(1)
+        rec = [([word_2_idx["SOS"]], 1.) for _ in range(beam_width)]
+        step = 1
+        while step < MAX_LENGTH or all(i == word_2_idx["EOS"] for i in cur_inputs.tolist()):
+            nxt_rec = []
+            for i in range(beam_width):
+                cur_input = cur_inputs[i].unsqueeze(0)
+                _, _, hidden, nxt_predict = self.dec(cur_input, hidden, encoder_outputs, train=False)
+                nxt_predict = F.softmax(nxt_predict, dim=1)
+                nxt_predict, nxt_pos = nxt_predict.topk(beam_width)
+                nxt_predict = nxt_predict.squeeze(0)
+                nxt_pos = nxt_pos.squeeze(0)
+                for j in range(beam_width):
+                    beam_i_p = nxt_predict[j].item()
+                    beam_i_result = nxt_pos[j].item()
+                    last_rec, last_p = rec[i]
+                    cur_rec = last_rec + [beam_i_result]
+                    cur_p = last_p * beam_i_p
+                    nxt_rec.append((cur_rec, cur_p))
+
+            nxt_rec = sorted(nxt_rec, key=lambda x: x[1], reverse=True)[:beam_width]
+            rec = nxt_rec
+
+            nxt_inputs = torch.tensor([i[0][-1] for i in rec]).unsqueeze(1)
+            cur_inputs = nxt_inputs
+            step += 1
+        return rec
+
